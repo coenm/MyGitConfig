@@ -1,0 +1,48 @@
+#!/bin/bash
+
+# This pre-commit hook verifies the username and password based on the remote origin url.
+# Rename this file to 'pre-commit' and change the expected values at the bottom.
+#
+#
+# This content is taken from https://itnext.io/setup-git-with-multiple-configs-9b4111d6928c
+# All credits go to Erik Englund.
+#
+if git rev-parse --verify HEAD >/dev/null 2>&1
+then
+ against=HEAD
+else
+ # Initial commit: diff against an empty tree object
+ against=4b825dc642cb6eb9a060e54bf8d69288fbee4904
+fi
+# Redirect output to stderr.
+exec 1>&2
+REMOTE=`git config --get remote.origin.url`
+USERNAME=`git config --get user.name`
+EMAIL=`git config --get user.email`
+
+checkEmailUsername() {
+  if [[ "$EMAIL" != "$1" ]]
+  then
+    echo "Invalid email: $EMAIL"
+    echo "git config user.email $1"
+    exit 1
+  fi
+if [[ "$USERNAME" != "$2" ]]
+  then
+    echo "Invalid username: $USERNAME"
+    echo "git config user.name \"$2\""
+    exit 1
+  fi
+}
+
+## UPDATE THE VALUES ACCORDING YOUR SITUATION
+
+if [[ $REMOTE == *"gitlab.com"* ]]
+then
+  checkEmailUsername gitlab@gmail.com "gitlab user"
+fi
+
+if [[ $REMOTE == *"github.com"* ]]
+then
+  checkEmailUsername github@outlook.com "Outlook user"
+fi

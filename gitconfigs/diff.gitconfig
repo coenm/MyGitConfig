@@ -1,0 +1,36 @@
+# [diff]
+#	tool = vsdiffmerge
+[difftool]
+	prompt = true
+# [merge]
+#	tool = vsdiffmerge
+[mergetool]
+	prompt = true
+
+# SourceTree: use beyond compare
+[difftool "sourcetree"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" -o \"$MERGED\"
+	trustExitCode = true	
+
+# Visual Studio 2019: Use visual studio 2019
+[difftool "vsdiffmerge"]
+	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\CommonExtensions\\Microsoft\\TeamFoundation\\Team Explorer\\vsdiffmerge.exe\" \"$LOCAL\" \"$REMOTE\" //t
+	keepBackup = false
+[mergetool "vsdiffmerge"]
+	cmd = \"C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Enterprise\\Common7\\IDE\\CommonExtensions\\Microsoft\\TeamFoundation\\Team Explorer\\vsdiffmerge.exe\" \"$REMOTE\" \"$LOCAL\" \"$BASE\" \"$MERGED\" //m
+	keepBackup = false
+	trustExitCode = true	
+
+# BeyondCompare 3
+[difftool "bc3"]
+	path = 'C:/Program Files (x86)/Beyond Compare 3/bcomp.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "bc3"]
+	path = 'C:/Program Files (x86)/Beyond Compare 3/bcomp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+
+# BeyondCompare 4
+[difftool "bc4"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\"
+[mergetool "bc4"]
+	cmd = 'C:/Program Files/Beyond Compare 4/BComp.exe' \"$LOCAL\" \"$REMOTE\" \"$BASE\" -o \"$MERGED\"

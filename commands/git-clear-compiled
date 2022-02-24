@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# This script will remove all child 'bin' and 'obj' directories.
+
+set -e
+
+function usage() {
+    echo ""
+    echo "git clear-compiled [--dry-run]"
+}
+
+option_dryrun=0
+
+# actually parse the options and do stuff
+while [[ $1 = -?* ]]; do
+    case $1 in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -d|--dry-run)
+            option_dryrun=1
+            ;;
+        *) ;;
+    esac
+
+shift
+done
+
+
+# check if we are inside a git repository;
+if currentBranch=$(git symbolic-ref --short -q HEAD 2>/dev/null)
+then
+    echo On branch "$currentBranch"
+else
+    echo "This script only works in a git repository."
+    exit 1;
+fi
+
+
+# Dry run. Show directories to delete.
+if [ $option_dryrun -eq 1 ]; then
+    echo "Dry run."
+    find . -type d \( -name bin -o -name obj \) -exec echo Would delete: {} \;
+    exit 0;
+fi
+
+
+echo "Deleting **/bin/ and **/obj/ directories:"
+find . -type d \( -name bin -o -name obj \) -prune -exec rm -rf {} \; -exec echo deleted: {} \;
+echo "Done"
+exit 0;

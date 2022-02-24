@@ -1,0 +1,3 @@
+*.gitconfig.local
+*.local.gitconfig
+git-hooks/pre-commit

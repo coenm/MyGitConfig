@@ -1,0 +1,32 @@
+[alias]
+	clog = log --pretty=oneline --abbrev-commit --graph --decorate
+	plog =  log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	last = log -1 HEAD
+	unstage = reset HEAD --
+	publish = !git push --set-upstream origin $(git branch --show-current) # push and set upstream
+	cc = clear-compiled # custom command (removes obj/ and bin/  directories)
+	git = !exec git # Allow for accidental "git git" (http://caiustheory.com/git-git-git-git-git/)
+
+	# Cleaning up local git branches deleted on a remote
+	# source: https://www.erikschierboom.com/2020/02/17/cleaning-up-local-git-branches-deleted-on-a-remote/
+  	gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
+	lgone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}'" # source: https://www.erikschierboom.com/
+	cc2 = ! "find . -iname "bin" -o -iname "obj" | xargs rm -rf" # source: https://stackoverflow.com/questions/755382/
+
+# https://stackoverflow.com/questions/55266918/how-to-get-main-git-branch-name-from-command-line
+# releasenotes = git log --pretty-format:%s origin/master..origin/develop 
+
+	# handling some typo's
+	statsu = status
+	statsus = status
+	staus = status
+	pul = pull
+	puul = pull
+	branach = branch
+	bramch = branch
+	cloen = clone
+;
+;
+; Add this file to git config by adding 
+;[include]
+;	path = <path to this repo>/aliases.gitconfig
