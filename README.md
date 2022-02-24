@@ -1,0 +1,2 @@
+# MyGitConfig
+Git configuration
