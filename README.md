@@ -13,7 +13,6 @@ You can also 'include' the config files  (ie `aliases.gitconfig`) in one of the 
 
 To use the custom commands, you have to make sure this directory is included in the PATH environment variable.
 
-
 ## Install
 
 - clone this repo
@@ -22,4 +21,4 @@ To use the custom commands, you have to make sure this directory is included in 
 ```gitconfig
 [include]
     path = d:/dir/to/this/repo/include_all.gitconfig
-``` 
+```
