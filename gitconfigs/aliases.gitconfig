@@ -7,11 +7,22 @@
 	cc = clear-compiled # custom command (removes obj/ and bin/  directories)
 	git = !exec git # Allow for accidental "git git" (http://caiustheory.com/git-git-git-git-git/)
 
+    vlog = log --pretty=format:%s origin/master..origin/develop
+	diff-master-develop = log --pretty=format:%s origin/master..origin/develop
+	diff-main-develop = log --pretty=format:%s origin/main..origin/develop
+	# git config --global alias.rlog "!f() { git log --pretty=format:%s main..release/$(date +${1:-%Y.%m.%d}); }; f"
+    
+	rlog = "!f() { git log --pretty=format:%s origin/main..release/$(date +${1:-%Y.%m.%d}); }; f"
+	logmasterrelease = "!f() { git log --pretty=format:%s origin/master..release/$(date +${1:-%Y.%m.%d}); }; f"
+	logmainrelease = "!f() { git log --pretty=format:%s origin/main..release/$(date +${1:-%Y.%m.%d}); }; f"
+
 	# Cleaning up local git branches deleted on a remote
 	# source: https://www.erikschierboom.com/2020/02/17/cleaning-up-local-git-branches-deleted-on-a-remote/
   	gone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D"
 	lgone = ! "git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}'" # source: https://www.erikschierboom.com/
 	cc2 = ! "find . -iname "bin" -o -iname "obj" | xargs rm -rf" # source: https://stackoverflow.com/questions/755382/
+
+	sln = !start $(find . -maxdepth 1 -type f -name '*.sln')
 
 # https://stackoverflow.com/questions/55266918/how-to-get-main-git-branch-name-from-command-line
 # releasenotes = git log --pretty-format:%s origin/master..origin/develop 
