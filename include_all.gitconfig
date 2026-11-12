@@ -3,6 +3,9 @@
 #	hooksPath = ./git-hooks/
 	longpaths = true
 
+[init]
+    defaultBranch = main
+
 [include]
 	path = gitconfigs/user.personal.gitconfig
 	path = gitconfigs/aliases.gitconfig

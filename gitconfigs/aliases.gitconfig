@@ -24,6 +24,21 @@
 
 	sln = !start $(find . -maxdepth 1 -type f -name '*.sln')
 
+	# 'git worktree feature' shortcut for creating a new feature branch worktree based on a base branch (default: main)
+	wtf = "!f() { \
+        feature=\"$1\"; \
+        base=\"${2:-main}\"; \
+        dir_feature=$(printf \"%s\" \"$feature\" | tr \"/\" \"_\"); \
+        dir_base=$(printf \"%s\" \"$base\" | tr \"/\" \"_\"); \
+        git fetch origin && \
+        git worktree add \
+            -b \"feature/$feature\" \
+            \"../wt ${dir_base} feature_${dir_feature}\" \
+            \"origin/$base\"; \
+    }; f"
+
+
+
 # https://stackoverflow.com/questions/55266918/how-to-get-main-git-branch-name-from-command-line
 # releasenotes = git log --pretty-format:%s origin/master..origin/develop 
 
