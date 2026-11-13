@@ -41,6 +41,7 @@
             \"${worktree_dir}/${dir_base} feature_${dir_feature}\" \
             \"origin/$base\"; \
     }; f"
+	worktree-feature = "!git wtf"
 
 
 
