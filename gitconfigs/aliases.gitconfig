@@ -30,10 +30,15 @@
         base=\"${2:-main}\"; \
         dir_feature=$(printf \"%s\" \"$feature\" | tr \"/\" \"_\"); \
         dir_base=$(printf \"%s\" \"$base\" | tr \"/\" \"_\"); \
+        repo_root=$(git rev-parse --show-toplevel) && \
+        repo_parent=$(dirname \"$repo_root\") && \
+        repo_name=$(basename \"$repo_root\") && \
+        worktree_dir=\"${repo_parent}/${repo_name}.worktrees\" && \
+        mkdir -p \"$worktree_dir\" && \
         git fetch origin && \
         git worktree add \
             -b \"feature/$feature\" \
-            \"../wt ${dir_base} feature_${dir_feature}\" \
+            \"${worktree_dir}/${dir_base} feature_${dir_feature}\" \
             \"origin/$base\"; \
     }; f"
 
